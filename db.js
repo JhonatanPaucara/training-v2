@@ -1,19 +1,44 @@
-const products = [
-  {
-    id: '91c0emq9wqm0e9',
+const products = [{
+    id: '12345678901',
     name: 'Media',
     price: 50.00,
-    currency: 'PEN'
+    currency: 'PEN',
+    owner: 'user1'
   },
   {
-    id: 'as09as9d0a9d0-a9',
+    id: '12345678902',
     name: 'Pantalon',
     price: 150.00,
-    currency: 'PEN'
+    currency: 'PEN',
+    owner: 'user2'
+  },
+  {
+    id: '12345678903',
+    name: 'zapato',
+    price: 120.00,
+    currency: 'PEN',
+    owner: 'user2'
+  },
+  {
+    id: '12345678904',
+    name: 'zapatilla',
+    price: 100.00,
+    currency: 'PEN',
+    owner: 'user1'
   },
 ]
 
-const users = [];
+const users = [{
+    id: 'user1',
+    name: 'Jhonatan Paucara',
+    nickName: 'JP19'
+  },
+  {
+    id: 'user2',
+    name: 'Jenny Pirca',
+    nickName: 'JP27'
+  },
+];
 
 // Trailing comma
 module.exports = {

@@ -5,6 +5,7 @@ const uuidv4 = require('uuid/v4');
 const validateProduct = require('./products.validate');
 
 let products = require('../../db').products;
+let users = require('../../db').users;
 
 const productsRoutes = express.Router()
 
@@ -13,28 +14,35 @@ productsRoutes.get('/', (req, res) => {
 });
 
 productsRoutes.post('/', validateProduct, (req, res) => {
-  const newProduct = { ...req.body, id: uuidv4() };
+  const newProduct = {
+    ...req.body,
+    id: uuidv4()
+  };
   products.push(newProduct);
   res.json(newProduct);
 })
 
-///products/098as908asd098asd089
-productsRoutes.put('/:id', (req, res) => {
-  const filterProduct = products.filter(product => product.id === req.params.id)[0];
-
-  const updatedProduct = { ...filterProduct, ...req.body  };
-
+productsRoutes.put('/:id/owner/:owner', (req, res) => {
+  const filterProduct = products.find(product => (product.id === req.params.id && product.owner === req.params.owner));
+  if (filterProduct == null) {
+    res.send('Error durante la edición');
+    return console.log('Error durante la edición');
+  }
+  const updatedProduct = Object.assign(filterProduct, req.body);
   res.json(updatedProduct);
 })
 
 // DESTROY
 
-productsRoutes.delete('/:id', (req, res) => {
-  const filterProduct = products.filter(product => product.id === req.params.id)[0];
+productsRoutes.delete('/:id/owner/:owner', (req, res) => {
+  const filterProductIndex = products.findIndex(product => (product.id === req.params.id && product.owner === req.params.owner));
+  if (filterProductIndex == null) {
+    res.send('Error durante la edición');
+    return console.log('Error durante la edición');
+  }
+  const filterProduct = products[filterProductIndex]
 
-  const productsWithoutSelected = products.filter(product => product.id !== req.params.id)[0];
-
-  products = productsWithoutSelected;
+  products.splice(filterProductIndex, 1)
 
   res.json(filterProduct);
 });
