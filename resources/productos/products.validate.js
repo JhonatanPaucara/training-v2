@@ -1,4 +1,4 @@
-const Joi = require('@hapi/joi')
+const Joi = require('@hapi/joi');
 let users = require('../../db').users;
 const productSchema = Joi.object({
   name: Joi.string().min(2).max(100).required(),
@@ -7,19 +7,16 @@ const productSchema = Joi.object({
   owner: Joi.string().min(3).max(8).required(),
 });
 
-
 const validateProduct = (req, res, next) => {
   const validation = productSchema.validate(req.body);
-  const productUser = users.find(user => user.id === req.body.owner)
-
+  const productUser = users.find(user => user.id === req.body.owner);
   if (validation.error) {
-    return res.status(403).send('Verifica tus datos')
-  }
+    return res.status(403).send('Verifica tus datos');
+  };
   if (productUser == null) {
-    return res.status(403).send('No existe ese usuario')
-  }
-  next()
-}
-
+    return res.status(403).send('No existe ese usuario');
+  };
+  next();
+};
 
 module.exports = validateProduct;

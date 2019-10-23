@@ -31,12 +31,14 @@ const products = [{
 const users = [{
     id: 'user1',
     name: 'Jhonatan Paucara',
-    nickName: 'JP19'
+    nickName: 'JP19',
+    password: 'clave1'
   },
   {
     id: 'user2',
     name: 'Jenny Pirca',
-    nickName: 'JP27'
+    nickName: 'JP27',
+    password: 'clave2'
   },
 ];
 
